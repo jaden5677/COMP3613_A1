@@ -1,13 +1,13 @@
-from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
 class Admin(db.User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    admin_level = db.Column(db.Integer, nullable=False, default=1)
+    staff_list = db.relationship('Staff', backref='admin', lazy=True)
+    roster_list = db.relationship('Roster', backref='admin', lazy=True)
 
-    def __init__(self, username, password, admin_level=1):
+    def __init__(self, username, password):
         super().__init__(username, password)
-        self.admin_level = admin_level
+        
 
     def get_json(self):
         user_json = super().get_json()
