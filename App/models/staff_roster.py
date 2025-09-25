@@ -10,6 +10,16 @@ class StaffRoster(db.Model):
     assigned_shift_end = db.Column(db.Time, db.ForeignKey('roster.shift_end'), nullable=False)
     staff = db.relationship('Staff', backref='staff_rosters', lazy=True)
     roster = db.relationship('Roster', backref='staff_rosters', lazy=True)
+    date = db.relationship('Roster', foreign_keys=[assigned_date], primaryjoin='StaffRoster.assigned_date == Roster.shift_date', lazy=True)
+    shift_start = db.relationship('Roster', foreign_keys=[assigned_shift_start], primaryjoin='StaffRoster.assigned_shift_start == Roster.shift_start', lazy=True)
+    shift_end = db.relationship('Roster', foreign_keys=[assigned_shift_end], primaryjoin='StaffRoster.assigned_shift_end == Roster.shift_end', lazy=True)
+
+    def init__(self, staff_id, roster_id, assigned_date, assigned_shift_start, assigned_shift_end):
+        self.staff_id = staff_id
+        self.roster_id = roster_id
+        self.assigned_date = assigned_date
+        self.assigned_shift_start = assigned_shift_start
+        self.assigned_shift_end = assigned_shift_end
 
     def __repr__(self):
         return f'<StaffRoster Staff {self.staff_id} - Roster {self.roster_id} on {self.assigned_date}>'

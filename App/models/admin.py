@@ -9,6 +9,12 @@ class Admin(db.User):
         super().__init__(username, password)
         
 
+    def get_staff_roster(self):
+        return {
+            'staff': [staff.get_json() for staff in self.staff_list],
+            'rosters': [roster.get_json() for roster in self.roster_list]
+        }
+
     def get_json(self):
         user_json = super().get_json()
         user_json.update({
