@@ -1,12 +1,13 @@
 from App.database import db
+from .staff import Staff
 
-class Admin(db.User):
-    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+class Admin(Staff):
+    id = db.Column(db.Integer, db.ForeignKey('staff.id'), primary_key=True)
     staff_list = db.relationship('Staff', backref='admin', lazy=True)
     roster_list = db.relationship('Roster', backref='admin', lazy=True)
 
-    def __init__(self, username, password):
-        super().__init__(username, password)
+    def __init__(self, username, password, position, email):
+        super().__init__(username, password, position=position, email=email)
         
 
     def get_staff_roster(self):

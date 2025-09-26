@@ -6,7 +6,7 @@ class Roster(db.Model):
     shift_date = db.Column(db.Date, nullable=False)
     shift_start = db.Column(db.Time, nullable=True)
     shift_end = db.Column(db.Time, nullable=True)
-    staff = db.relationship('Staff', backref='roster', lazy=True)
+    #staff = db.relationship('Staff', backref='roster', lazy=True)
 
 
     def __init__(self, staff_id, shift_date, shift_start, shift_end):

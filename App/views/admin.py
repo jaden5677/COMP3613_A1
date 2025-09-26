@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, se
 from flask_admin import Admin
 from flask import flash, redirect, url_for, request
 from App.database import db
-from App.models import User
+from App.models import Staff as User
 
 class AdminView(ModelView):
 
