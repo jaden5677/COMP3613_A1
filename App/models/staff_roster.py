@@ -24,7 +24,10 @@ class StaffRoster(db.Model):
         self.staff_check_out = None
 
     def __repr__(self):
-        return f'<StaffRoster Staff {self.staff_id} - Roster {self.roster_id} on {self.assigned_date}>'
+        if self.staff_check_in and self.staff_check_out:
+            return f'<StaffRoster Staff {self.staff_id} - Roster {self.roster_id} on {self.assigned_date} (Checked in at {self.staff_check_in}, Checked out at {self.staff_check_out})>'
+        else:
+            return f'<StaffRoster Staff {self.staff_id} - Roster {self.roster_id} on {self.assigned_date}>'
     
     def set_check_in(self, check_in_time):
         self.staff_check_in = check_in_time

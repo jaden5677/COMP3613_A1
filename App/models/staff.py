@@ -33,4 +33,4 @@ class Staff(db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return f'<User {self.username} - {self.email}>'
+        return f'<User {self.id} - {self.username} - {self.email}>'

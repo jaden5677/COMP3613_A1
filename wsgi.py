@@ -7,7 +7,7 @@ from App.models import Staff
 from App.main import create_app
 from App.controllers import ( create_user, get_all_users_json, get_all_users, initialize )
 from App.controllers.admin import ( create_admin, get_all_admins, get_admin, admin_create_roster, admin_update_roster, admin_delete_roster, admin_get_rosters_by_staff, admin_get_all_rosters  )
-from App.controllers.staff_roster import ( assign_roster_to_staff, get_all_staff_rosters, get_all_staff_rosters_json, update_staff_check_in, update_staff_check_out )
+from App.controllers.staff_roster import ( assign_roster_to_staff, get_all_staff_rosters, get_all_staff_rosters_json, update_staff_check_in, update_staff_check_out, get_all_staff_rosters_by_complete )
 
 
 # This commands file allow you to create convenient CLI commands for testing controllers
@@ -82,15 +82,16 @@ def get_admins_command():
         for admin in admins:
             print(admin.get_json())
 
-@user_cli.command("get-rosters", help="Get all rosters (admin only)")
-@click.argument("admin_id", type=int, default=2)
-def get_rosters_command(admin_id):
-    rosters = admin_get_all_rosters(admin_id)
+@user_cli.command("get-rosters", help="Get all rosters")
+def get_rosters_command():
+    rosters =get_all_staff_rosters()
     if not rosters:
-        print(f'Admin with id {admin_id} not found or no rosters available.')
+        print(f'No rosters available.')
     else:
         for roster in rosters:
-            print(roster.get_json())
+            print(roster)
+
+    
 
 @user_cli.command("staff-check-in", help="Staff check in to their assigned roster, time is in the format HH:MM:SS")
 @click.argument("assignment_id", type=int, default=1)
@@ -113,6 +114,17 @@ def staff_check_out_command(assignment_id, check_out_time):
         print(f'Assignment with id {assignment_id} not found. Check-out failed.')
     else:
         print(f'Staff checked out for assignment {assignment_id} at {check_out_time}.')
+
+@user_cli.command("get-complete-rosters", help="Get all completed rosters (with check-in and check-out)")
+def get_complete_rosters_command():
+    rosters =get_all_staff_rosters_by_complete()
+    if not rosters:
+        print(f'No completed rosters available.')
+    else:
+        for roster in rosters:
+            print(roster)
+
+
     
 @user_cli.command("list", help="Lists users in the database")
 @click.argument("format", default="string")
