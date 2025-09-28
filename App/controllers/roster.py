@@ -8,7 +8,7 @@ def get_roster(roster_id):
 
 # Get all rosters
 def get_all_rosters():
-	return db.session.scalars(db.select(Roster)).all()
+	return db.session.query(Roster).all()
 
 # Get all rosters as JSON
 def get_all_rosters_json():

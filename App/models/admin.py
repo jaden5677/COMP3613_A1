@@ -18,7 +18,5 @@ class Admin(Staff):
 
     def get_json(self):
         user_json = super().get_json()
-        user_json.update({
-            'admin_level': self.admin_level
-        })
+
         return user_json

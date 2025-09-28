@@ -16,7 +16,7 @@ def get_admin(admin_id):
 
 
 def get_all_admins():
-	return db.session.query(db.select(Admin)).all()
+	return db.session.query(Admin).all()
 
 
 def get_all_admins_json():

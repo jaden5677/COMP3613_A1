@@ -7,9 +7,7 @@ class Staff(db.Model):
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=True, unique=True)
     position = db.Column(db.String(50), nullable=False, default='Staff')
-    #roster = db.relationship('Roster', backref='staff', lazy=True)
-    check_in_time = db.Column(db.Time, nullable=True)
-    check_out_time = db.Column(db.Time, nullable=True)
+    
 
     def __init__(self, username, password, position=position, email=email):
         self.username = username
@@ -17,11 +15,6 @@ class Staff(db.Model):
         self.email = email
         self.position = position
 
-    def set_check_in(self, check_in_time):
-        self.check_in_time = check_in_time
-
-    def set_check_out(self, check_out_time):
-        self.check_out_time = check_out_time
 
     def get_json(self):
         return{
@@ -29,8 +22,6 @@ class Staff(db.Model):
             'username': self.username,
             'email': self.email,
             'position': self.position,
-            'check_in_time': self.check_in_time,
-            'check_out_time': self.check_out_time
         }
     
     def set_password(self, password):
