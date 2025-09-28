@@ -1,21 +1,21 @@
-from App.models import User
+from App.models import Staff
 from App.database import db
 
-def create_user(username, password):
-    newuser = User(username=username, password=password)
+def create_user(username, password, position, email):
+    newuser = Staff(username=username, password=password, position=position, email=email)
     db.session.add(newuser)
     db.session.commit()
     return newuser
 
 def get_user_by_username(username):
-    result = db.session.execute(db.select(User).filter_by(username=username))
+    result = db.session.execute(db.select(Staff).filter_by(username=username))
     return result.scalar_one_or_none()
 
 def get_user(id):
-    return db.session.get(User, id)
+    return db.session.get(Staff, id)
 
 def get_all_users():
-    return db.session.scalars(db.select(User)).all()
+    return db.session.query(Staff).all()
 
 def get_all_users_json():
     users = get_all_users()
