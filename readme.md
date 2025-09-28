@@ -8,6 +8,28 @@
 # Flask MVC Template
 A template for flask applications structured in the Model View Controller pattern [Demo](https://dcit-flaskmvc.herokuapp.com/). [Postman Collection](https://documenter.getpostman.com/view/583570/2s83zcTnEJ)
 
+# Flask Commands
+structure:
+--bare command--
+--examples of usage--
+
+flask init - Initialize DTB
+flask user create-staff
+flask user create-admin   
+flask user create-staff jay jaypass accounts jay@mail.com
+flask user create-staff bbg bbgpass hell bbg@mail.com 
+flask user create-roster 
+flask user create-roster 2 3 2023-10-10 09:00:00 17:00:00
+flask user create-roster 2 1 2023-10-10 09:00:00 17:00:00
+flask user create-roster 2 4 2023-10-11 10:00:00 18:00:00
+flask user get-rosters
+flask user staff-check-in 1 09:00:00
+flask user staff-check-out 1 17:00:00
+flask user staff-check-in 3 09:24:00
+flask user staff-check-out 3 16:45:00
+flask user get-complete-rosters
+
+
 
 # Dependencies
 * Python3/pip3
